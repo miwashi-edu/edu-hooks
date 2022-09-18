@@ -61,18 +61,14 @@ npm pkg set scripts.dev="nodemon server.js"
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
 npm pkg set scripts.componenttest="jest  --group=component"
 npm pkg set scripts.integrationtest="jest  --group=integration"
-npm pkg set scripts.prepare="husky install"
 
-npm install husky -D
 npm install nodemon -D
 npm install jest -D
 npm install jest-runner-groups -D
 npm install express
 
-npm run prepare #Samma som "npx husky install"
 
-# Lägg till en pre-commit hook
-npx husky add .husky/pre-commit "npm test"
+
 
 echo "node_modules" > .gitignore
 echo "logs" >> .gitignore
@@ -80,6 +76,20 @@ echo "*.log" >> .gitignore
 echo "node_modules/" >> .gitignore
 echo ".env" >> .gitignore
 echo ".env.test" >> .gitignore
+
+#######
+# Lägg till commit hooks
+#######
+
+npm pkg set scripts.prepare="husky install"
+npm install husky -D
+npm run prepare #Samma som "npx husky install"
+npx husky add .husky/pre-commit "npm test # Lägg till en pre-commit hook
+
+#######
+#######
+
+
 git add .
 git commit -m "First commit with pre-commit unittesting"
 
