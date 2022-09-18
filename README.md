@@ -151,3 +151,29 @@ https://github.com/nvm-sh/nvm
 ## Windows
 https://community.chocolatey.org/packages?q=nvm
 ```
+
+## Bonus
+
+> Denna fungerar inte ännu. Den kräver att den senaste imagen tas bort med purge.   
+> Det är dock inget exempel som är användbart. En commit måste vara snabb, annars drar man sig
+> för att committa och då får man för stora deltan.
+
+
+``` js
+echo "node_modules" > .dockerignore
+curl -L https://gist.github.com/miwashiab/ea900b5a6a8b356a598d6d9a659b318c/raw/Dockerfile -o Dockerfile
+npm install node-docker-api -D
+npx husky add .husky/post-commit "docker build . -t shiwami/git-hooks:1.0"
+git add .
+git commit -m "First commit with post-commit deploy"
+```
+
+### Redigera .husky/post-commit
+```bash
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+docker stop test-backend || true && docker rm test-backend || true
+docker build . -t shiwami/git-hooks:1.0
+docker run --name test-backend -p 3010:3000 -d shiwami/git-hooks:latest
+```
