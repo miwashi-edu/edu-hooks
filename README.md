@@ -53,12 +53,22 @@ mkdir __tests__
 curl -L https://gist.github.com/miwashiab/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
 curl -L https://gist.github.com/miwashiab/5000a9ba2f8eec98fb61b99ec041ed04/raw/component-test.js -o ./__tests__/component-test.js
 curl -L https://gist.github.com/miwashiab/352322c4aa4ca4ecd839d63b0e95c8bd/raw/integration-test.js -o ./__tests__/integration-test.js
-npm pkg set scripts.prepare="husky install"
-npm install husky -D
-npm pkg set scripts.dev="nodemon server.js" #Inget mellanslag runt =
+curl -L  https://gist.github.com/miwashiab/642d5f51c7c93e6793356ad666f6be03/raw/server.js -o server.js
+npm pkg set main="server.js"
+npm pkg set description="Simple application to test commit hooks"
+npm pkg set scripts.start="node server.js" 
+npm pkg set scripts.dev="nodemon server.js"
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
 npm pkg set scripts.componenttest="jest  --group=component"
 npm pkg set scripts.integrationtest="jest  --group=integration"
+npm pkg set scripts.prepare="husky install"
+
+npm install husky -D
+npm install nodemon -D
+npm install jest -D
+npm install jest-runner-groups -D
+npm install express
+
 npm run prepare #Samma som "npx husky install"
 
 # Lägg till en pre-commit hook
@@ -116,6 +126,20 @@ describe('When testing jest', () => {
 })
 ```
 
+## server.js
+
+```js
+const express = require('express')
+const app = express()
+
+const PORT = process.env.PORT || 3000
+
+app.use('/', (req, res) => {
+  res.status(200).json({"status":"success"})
+})
+
+app.listen(PORT, console.log(`Server is listening at port ${PORT}`))
+```
 
 ## Använd NVM för att se hämta senaste node
 
@@ -127,5 +151,3 @@ https://github.com/nvm-sh/nvm
 ## Windows
 https://community.chocolatey.org/packages?q=nvm
 ```
-
-ren C:\ProgramData\chocolatey C:\ProgramData\chocolatey_old
