@@ -43,35 +43,35 @@ update.sample
 ## Description
 
 ```bash
-# Git hooks
-
 cd ws
 mkdir git-hooks
 cd git-hooks
 
 git init
 npm init -y
-
 mkdir __tests__
-touch ./__tests__/unittest.js
-
+curl -L https://gist.github.com/miwashiab/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
+curl -L https://gist.github.com/miwashiab/5000a9ba2f8eec98fb61b99ec041ed04/raw/component-test.js -o ./__tests__/component-test.js
+curl -L https://gist.github.com/miwashiab/352322c4aa4ca4ecd839d63b0e95c8bd/raw/integration-test.js -o ./__tests__/integration-test.js
 npm pkg set scripts.prepare="husky install"
-
 npm install husky -D
-
 npm pkg set scripts.dev="nodemon server.js" #Inget mellanslag runt =
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
 npm pkg set scripts.componenttest="jest  --group=component"
 npm pkg set scripts.integrationtest="jest  --group=integration"
-    
 npm run prepare #Samma som "npx husky install"
 
 # Lägg till en pre-commit hook
 npx husky add .husky/pre-commit "npm test"
 
-# Lägg till hooken till git
-git add .husky/pre-commit
-
+echo "node_modules" > .gitignore
+echo "logs" >> .gitignore
+echo "*.log" >> .gitignore
+echo "node_modules/" >> .gitignore
+echo ".env" >> .gitignore
+echo ".env.test" >> .gitignore
+git add .
+git commit -m "First commit with pre-commit unittesting"
 
 ```
 
