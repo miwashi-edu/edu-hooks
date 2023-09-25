@@ -50,10 +50,10 @@ cd git-hooks
 git init
 npm init -y
 mkdir __tests__
-curl -L https://gist.github.com/miwashiab/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
-curl -L https://gist.github.com/miwashiab/5000a9ba2f8eec98fb61b99ec041ed04/raw/component-test.js -o ./__tests__/component-test.js
-curl -L https://gist.github.com/miwashiab/352322c4aa4ca4ecd839d63b0e95c8bd/raw/integration-test.js -o ./__tests__/integration-test.js
-curl -L  https://gist.github.com/miwashiab/642d5f51c7c93e6793356ad666f6be03/raw/server.js -o server.js
+curl -L https://gist.github.com/miwashi/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
+curl -L https://gist.github.com/miwashi/5000a9ba2f8eec98fb61b99ec041ed04/raw/component-test.js -o ./__tests__/component-test.js
+curl -L https://gist.github.com/miwashi/352322c4aa4ca4ecd839d63b0e95c8bd/raw/integration-test.js -o ./__tests__/integration-test.js
+curl -L  https://gist.github.com/miwashi/642d5f51c7c93e6793356ad666f6be03/raw/server.js -o server.js
 npm pkg set main="server.js"
 npm pkg set description="Simple application to test commit hooks"
 npm pkg set scripts.start="node server.js" 
@@ -61,6 +61,7 @@ npm pkg set scripts.dev="nodemon server.js"
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
 npm pkg set scripts.componenttest="jest  --group=component"
 npm pkg set scripts.integrationtest="jest  --group=integration"
+npm pkg set jest.runner="jest-runner-groups"
 
 npm install nodemon -D
 npm install jest -D
