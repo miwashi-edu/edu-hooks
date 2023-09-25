@@ -84,7 +84,7 @@ echo ".env.test" >> .gitignore
 npm pkg set scripts.prepare="husky install"
 npm install husky -D
 npm run prepare #Samma som "npx husky install"
-npx husky add .husky/pre-commit "npm test # Lägg till en pre-commit hook
+npx husky add .husky/pre-commit "npm test # Lägg till en pre-commit hook"
 
 #######
 #######
