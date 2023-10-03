@@ -8,7 +8,6 @@
 ## instruktioner
 
 ```bash
-npm install --save-dev eslint
 npm init @eslint/config -y
 
 #✔ How would you like to use ESLint? · style
