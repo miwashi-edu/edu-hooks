@@ -15,7 +15,7 @@ npm init @eslint/config -y
 #✔ What type of modules does your project use? · commonjs
 #✔ Which framework does your project use? · none
 #✔ Does your project use TypeScript? · No / Yes
-#✔ Where does your code run? · browser
+#✔ Where does your code run? · node
 #✔ How would you like to define a style for your project? · guide
 #✔ Which style guide do you want to follow? · standard
 #✔ What format do you want your config file to be in? · JSON
